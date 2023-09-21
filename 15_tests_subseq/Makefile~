@@ -1,0 +1,6 @@
+all: test-subseq
+
+test-subseq: Maxseq.c Maxseq.c
+	gcc -o test-subseq Maxseq.c test-subseq.c 
+clean:
+	rm test-subseq

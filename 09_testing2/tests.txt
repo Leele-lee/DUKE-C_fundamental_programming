@@ -1,0 +1,14 @@
+aaaaa bbbbb
+aaaaa bbbbc
+aaabb bbbbc
+00020 20000
+aa123 bb124
+a1234 b1123
+123 234
+这是错误额 错误的示范
+aaaaa aaaaa
+1234
+12fs asdd scasa
+123aa 123
+01234 01230
+12345 123456

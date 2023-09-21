@@ -1,0 +1,53 @@
+Grading at Tue 12 Sep 2023 09:27:50 AM UTC
+**Testing broken implementation 10 **
+-------------------------------------
+
+expext: 9, but get -3.
+**Testing broken implementation 11 **
+-------------------------------------
+
+expext: 9, but get 25.
+**Testing broken implementation 1 **
+-------------------------------------
+
+expext: 9, but get 1.
+**Testing broken implementation 2 **
+-------------------------------------
+
+expext: 0, but get 1.
+**Testing broken implementation 3 **
+-------------------------------------
+
+expext: 1, but get 0.
+**Testing broken implementation 4 **
+-------------------------------------
+
+expext: -2147483648, but get 0.
+**Testing broken implementation 5 **
+-------------------------------------
+
+expext: 9, but get 12.
+**Testing broken implementation 6 **
+-------------------------------------
+
+expext: 0, but get 8.
+**Testing broken implementation 7 **
+-------------------------------------
+
+expext: 0, but get 27.
+**Testing broken implementation 8 **
+-------------------------------------
+
+expext: 9, but get -6.
+**Testing broken implementation 9 **
+-------------------------------------
+
+expext: 9, but get -3.
+**Testing correct implementation **
+-------------------------------------
+
+
+All tests were ok.
+
+
+Overall Grade: PASSED

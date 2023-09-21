@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+size_t maxSeq(int * array, size_t n);
+int main(void) {
+  int array[5] = {0, 1, 2, 5, 4};
+  int array3[3] = {0};
+  int array4[6] = {6, 5, 4, 3, 2, 1};
+  int array5[5] = {0, 0, 0, 0, 5};
+  if (maxSeq(array, 5) != 4) {
+    printf("failed in array");
+    exit(EXIT_FAILURE);
+  }
+  if (maxSeq(NULL, 0) != 0){
+    printf("failed in null");
+    exit(EXIT_FAILURE);
+  }
+  if (maxSeq(array3, 3)) {
+    printf("failed in array3");
+    exit(EXIT_FAILURE);
+  }
+  if (maxSeq(array4, 6)) {
+    printf("failed in array4");
+    exit(EXIT_FAILURE);
+  }
+  if (maxSeq(array5, 5)) {
+    printf("failed in array5");
+    exit(EXIT_FAILURE);
+  }
+  return EXIT_SUCCESS;
+}
