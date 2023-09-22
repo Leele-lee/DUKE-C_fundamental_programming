@@ -29,7 +29,7 @@ void decrypt(FILE * f) {
   if (decryptKey < 0 || decryptKey >= 26) {
     perror("encryp key is beyond the range [0, 26)");
   }
-  printf("encrypt key: %d", decryptKey);
+  fprintf(stdout, "%d\n", decryptKey);
 }
 
 

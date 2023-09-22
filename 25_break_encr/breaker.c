@@ -25,7 +25,8 @@ void decrypt(FILE * f) {
   }
   int index = findMaxFrequency(frequency, 26);
   char cryptChar = 'a' + index;
-  int decryptKey = abs('e' - cryptChar);
+  //int decryptKey = abs('e' - cryptChar);
+  int decryptKey = cryptChar - 'e';
   if (decryptKey < 0 || decryptKey >= 26) {
     perror("encryp key is beyond the range [0, 26)");
   }
