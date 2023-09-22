@@ -1,4 +1,4 @@
-Grading at Fri 22 Sep 2023 03:36:02 AM UTC
+Grading at Fri 22 Sep 2023 03:50:50 AM UTC
 Attempting to compile breaker.c 
 make: 'breaker' is up to date.
 testcase1 passed
@@ -7,9 +7,9 @@ testcase2:
 testcase2 passed
 #################################################
 testcase3:
-testcase3 failed
+testcase3 passed
 #################################################
 testcase4:
 testcase4 passed
 
-Overall Grade: C
+Overall Grade: A
