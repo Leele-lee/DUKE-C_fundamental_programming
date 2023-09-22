@@ -1,5 +1,15 @@
-Grading at Fri 22 Sep 2023 03:07:42 AM UTC
+Grading at Fri 22 Sep 2023 03:16:14 AM UTC
 Attempting to compile breaker.c 
-The code did not compile!
+make: 'breaker' is up to date.
+testcase1 passed
+#################################################
+testcase2:
+testcase2 failed
+#################################################
+testcase3:
+testcase3 failed
+#################################################
+testcase4:
+testcase4 failed
 
 Overall Grade: F
