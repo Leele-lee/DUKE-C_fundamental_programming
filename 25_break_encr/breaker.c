@@ -27,6 +27,9 @@ void decrypt(FILE * f) {
   char cryptChar = 'a' + index;
   //int decryptKey = abs('e' - cryptChar);
   int decryptKey = cryptChar - 'e';
+  if (decryptKey < 0) {
+    decryptKey = 26 - 'e' + cryptChar;
+  }
   if (decryptKey < 0 || decryptKey >= 26) {
     perror("encryp key is beyond the range [0, 26)");
   }
