@@ -27,6 +27,8 @@ void decrypt(FILE * f) {
   char cryptChar = 'a' + index;
   //int decryptKey = abs('e' - cryptChar);
   int decryptKey = cryptChar - 'e';
+
+  // if decryptKey < 0, need add 20s add not direct return decryptKey < 0
   if (decryptKey < 0) {
     decryptKey = 26 - 'e' + cryptChar;
   }
