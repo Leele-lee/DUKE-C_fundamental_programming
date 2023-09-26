@@ -43,7 +43,6 @@ int main(int argc, char ** argv) {
     }
     if (strchr(oneLine, '\n') - oneLine != 10) {
       fprintf(stderr, "LINE IS TOO SHORT");
-      return EXIT_FAILURE;
     }
     
     for (int j = 0; j < 10; j++) {
@@ -53,7 +52,6 @@ int main(int argc, char ** argv) {
   }
   if (lines < 10) {
     fprintf(stderr, "NOT ENOUGH LINES");
-    return EXIT_FAILURE;
   }
   rotate(matrix);
   for (int i = 0; i < 10; i++) {
