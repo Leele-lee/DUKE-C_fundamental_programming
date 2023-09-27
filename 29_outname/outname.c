@@ -5,4 +5,8 @@
 
 char * computeOutputFileName(const char * inputName) {
   //WRITE ME
+  char * outputName = malloc((strlen(inputName) + 5) * sizeof(* outputName));
+  strcpy(outputName, inputName);
+  strcat(outputName, ".enc");
+  return outputName;
 }
