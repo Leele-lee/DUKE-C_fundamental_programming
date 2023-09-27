@@ -1,178 +1,28 @@
-Grading at Wed 27 Sep 2023 12:50:02 PM UTC
+Grading at Wed 27 Sep 2023 01:15:22 PM UTC
 Attempting to compile encrypt.c
 testcase1:
 your output was correct
-  - Valgrind reported errors
-valgrind was not clean
-==319== Memcheck, a memory error detector
-==319== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==319== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==319== 
-==319== Parent PID: 318
-==319== 
-==319== 
-==319== HEAP SUMMARY:
-==319==     in use at exit: 149 bytes in 2 blocks
-==319==   total heap usage: 6 allocs, 4 frees, 2,117 bytes allocated
-==319== 
-==319== 29 bytes in 1 blocks are definitely lost in loss record 1 of 2
-==319==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==319==    by 0x1094ED: main (in /graderhome/work/28_fix_vg_encr/encrypt)
-==319== 
-==319== 120 bytes in 1 blocks are definitely lost in loss record 2 of 2
-==319==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==319==    by 0x48D66C3: getdelim (iogetdelim.c:62)
-==319==    by 0x1093E4: encrypt (in /graderhome/work/28_fix_vg_encr/encrypt)
-==319==    by 0x10956A: main (in /graderhome/work/28_fix_vg_encr/encrypt)
-==319== 
-==319== LEAK SUMMARY:
-==319==    definitely lost: 149 bytes in 2 blocks
-==319==    indirectly lost: 0 bytes in 0 blocks
-==319==      possibly lost: 0 bytes in 0 blocks
-==319==    still reachable: 0 bytes in 0 blocks
-==319==         suppressed: 0 bytes in 0 blocks
-==319== 
-==319== For lists of detected and suppressed errors, rerun with: -s
-==319== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
 #################################################
 testcase2:
   - Valgrind was clean (no errors, no memory leaks)
 valgrind was clean
 #################################################
 testcase3:
-  - Valgrind reported errors
-valgrind was not clean
-==336== Memcheck, a memory error detector
-==336== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==336== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==336== 
-==336== Parent PID: 335
-==336== 
-==336== 
-==336== HEAP SUMMARY:
-==336==     in use at exit: 149 bytes in 2 blocks
-==336==   total heap usage: 6 allocs, 4 frees, 2,117 bytes allocated
-==336== 
-==336== 29 bytes in 1 blocks are definitely lost in loss record 1 of 2
-==336==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==336==    by 0x1094ED: main (in /graderhome/work/28_fix_vg_encr/encrypt)
-==336== 
-==336== 120 bytes in 1 blocks are definitely lost in loss record 2 of 2
-==336==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==336==    by 0x48D66C3: getdelim (iogetdelim.c:62)
-==336==    by 0x1093E4: encrypt (in /graderhome/work/28_fix_vg_encr/encrypt)
-==336==    by 0x10956A: main (in /graderhome/work/28_fix_vg_encr/encrypt)
-==336== 
-==336== LEAK SUMMARY:
-==336==    definitely lost: 149 bytes in 2 blocks
-==336==    indirectly lost: 0 bytes in 0 blocks
-==336==      possibly lost: 0 bytes in 0 blocks
-==336==    still reachable: 0 bytes in 0 blocks
-==336==         suppressed: 0 bytes in 0 blocks
-==336== 
-==336== For lists of detected and suppressed errors, rerun with: -s
-==336== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
 #################################################
 testcase4:
-  - Valgrind reported errors
-valgrind was not clean
-==345== Memcheck, a memory error detector
-==345== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==345== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==345== 
-==345== Parent PID: 344
-==345== 
-==345== 
-==345== HEAP SUMMARY:
-==345==     in use at exit: 149 bytes in 2 blocks
-==345==   total heap usage: 6 allocs, 4 frees, 2,117 bytes allocated
-==345== 
-==345== 29 bytes in 1 blocks are definitely lost in loss record 1 of 2
-==345==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==345==    by 0x1094ED: main (in /graderhome/work/28_fix_vg_encr/encrypt)
-==345== 
-==345== 120 bytes in 1 blocks are definitely lost in loss record 2 of 2
-==345==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==345==    by 0x48D66C3: getdelim (iogetdelim.c:62)
-==345==    by 0x1093E4: encrypt (in /graderhome/work/28_fix_vg_encr/encrypt)
-==345==    by 0x10956A: main (in /graderhome/work/28_fix_vg_encr/encrypt)
-==345== 
-==345== LEAK SUMMARY:
-==345==    definitely lost: 149 bytes in 2 blocks
-==345==    indirectly lost: 0 bytes in 0 blocks
-==345==      possibly lost: 0 bytes in 0 blocks
-==345==    still reachable: 0 bytes in 0 blocks
-==345==         suppressed: 0 bytes in 0 blocks
-==345== 
-==345== For lists of detected and suppressed errors, rerun with: -s
-==345== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
 #################################################
 testcase5:
-  - Valgrind reported errors
-valgrind was not clean
-==354== Memcheck, a memory error detector
-==354== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==354== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==354== 
-==354== Parent PID: 353
-==354== 
-==354== 
-==354== HEAP SUMMARY:
-==354==     in use at exit: 149 bytes in 2 blocks
-==354==   total heap usage: 6 allocs, 4 frees, 2,117 bytes allocated
-==354== 
-==354== 29 bytes in 1 blocks are definitely lost in loss record 1 of 2
-==354==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==354==    by 0x1094ED: main (in /graderhome/work/28_fix_vg_encr/encrypt)
-==354== 
-==354== 120 bytes in 1 blocks are definitely lost in loss record 2 of 2
-==354==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==354==    by 0x48D66C3: getdelim (iogetdelim.c:62)
-==354==    by 0x1093E4: encrypt (in /graderhome/work/28_fix_vg_encr/encrypt)
-==354==    by 0x10956A: main (in /graderhome/work/28_fix_vg_encr/encrypt)
-==354== 
-==354== LEAK SUMMARY:
-==354==    definitely lost: 149 bytes in 2 blocks
-==354==    indirectly lost: 0 bytes in 0 blocks
-==354==      possibly lost: 0 bytes in 0 blocks
-==354==    still reachable: 0 bytes in 0 blocks
-==354==         suppressed: 0 bytes in 0 blocks
-==354== 
-==354== For lists of detected and suppressed errors, rerun with: -s
-==354== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
 #################################################
 testcase6:
-  - Valgrind reported errors
-valgrind was not clean
-==363== Memcheck, a memory error detector
-==363== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==363== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==363== 
-==363== Parent PID: 362
-==363== 
-==363== 
-==363== HEAP SUMMARY:
-==363==     in use at exit: 149 bytes in 2 blocks
-==363==   total heap usage: 6 allocs, 4 frees, 2,117 bytes allocated
-==363== 
-==363== 29 bytes in 1 blocks are definitely lost in loss record 1 of 2
-==363==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==363==    by 0x1094ED: main (in /graderhome/work/28_fix_vg_encr/encrypt)
-==363== 
-==363== 120 bytes in 1 blocks are definitely lost in loss record 2 of 2
-==363==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==363==    by 0x48D66C3: getdelim (iogetdelim.c:62)
-==363==    by 0x1093E4: encrypt (in /graderhome/work/28_fix_vg_encr/encrypt)
-==363==    by 0x10956A: main (in /graderhome/work/28_fix_vg_encr/encrypt)
-==363== 
-==363== LEAK SUMMARY:
-==363==    definitely lost: 149 bytes in 2 blocks
-==363==    indirectly lost: 0 bytes in 0 blocks
-==363==      possibly lost: 0 bytes in 0 blocks
-==363==    still reachable: 0 bytes in 0 blocks
-==363==         suppressed: 0 bytes in 0 blocks
-==363== 
-==363== For lists of detected and suppressed errors, rerun with: -s
-==363== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
+  - Valgrind was clean (no errors, no memory leaks)
+valgrind was clean
 
-Overall Grade: F
+Overall Grade: A
