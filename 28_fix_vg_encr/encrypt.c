@@ -4,8 +4,8 @@
 #include <string.h>
 
 void encrypt(FILE * f, int key, FILE * outfile){
-  char * line;
-  size_t sz;
+  char * line = NULL;
+  size_t sz = 0;
   while (getline(&line,&sz, f) >= 0) {
     char * ptr = line;
     while (*ptr != '\0') {
