@@ -42,7 +42,7 @@ int main(int argc, char ** argv) {
   if (argc == 1) {
     processLine(stdin);
   } else {
-    for (int i = 1; i <= argc; i++) {
+    for (int i = 1; i < argc; i++) {
       FILE * f = fopen(argv[i], "r");
       if (f == NULL) {
 	perror("Couldn't open the file\n");
