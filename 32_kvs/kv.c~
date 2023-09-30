@@ -13,17 +13,6 @@ kvarray_t * readKVs(const char * fname) {
   if (f == NULL) {
     return NULL; //Could not open file->indicate failure
   }
-  kvarray_t * kvArray = malloc(sizeof(*kvArray));
-  kvArray->kvpair = NULL;
-  kvArray->numKvpairs = 0;
-  size_t sz = 0;
-  char * line = NULL;
-  size_t i = 0;
-  char * value = NULL;
-  while (getline(&line, &sz, f) >= 0) {
-    
-    kvpair_t * currPair = malloc(sizeof(*currPair));
-  }
   
 }
 
