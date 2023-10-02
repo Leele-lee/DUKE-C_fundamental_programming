@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "kv.h"
+#include <assert.h>
 
 //return the left part of delim
 char *partitionBy(char *line, char *delim) {
@@ -38,19 +39,21 @@ kvarray_t * readKVs(const char * fname) {
     value = partitionBy(line, "=");
     assert(value != NULL);
     
-    kvpair_t * currPair = malloc(sizeof(*currPair));
-    currPair->key = malloc((strlen(line) + 1) * sizeof(currPair->key));
-    currPair->value = malloc((strlen(value) + 1) * sizeof(currPair->value));
+    kvpair_t *currPair = malloc(sizeof(*currPair)); //an array of kvpair_t
+    currPair->key = malloc((strlen(line) + 1) * sizeof(*currPair->key));
+    currPair->value = malloc((strlen(value) + 1) * sizeof(*currPair->value));
     strcpy(currPair->key, line);
     strcpy(currPair->value, value);
 
-    kvArray->kvpair = realloc(kvArray->kvpair, (i + 1) * sizeof(kvpair_t));
-    kvArray->kvpair[i] = currPair; //important currPair has * or not 
+    kvArray->kvpair = realloc(kvArray->kvpair, (i + 1) * sizeof(*kvArray->kvpair));
+    kvArray->kvpair[i] = currPair; //*currPair is kvpair_t
     i++;
     kvArray->numKvpairs = i;
-    
-    free(kvpair);
+
+    line = NULL;
+    //free(key);
     free(value);
+    free(currPair);
   }
   free(line);
 
@@ -65,8 +68,11 @@ kvarray_t * readKVs(const char * fname) {
 void freeKVs(kvarray_t * pairs) {
   //WRITE ME
   for (int i = 0; i < pairs->numKvpairs; i++) {
+    free(pairs->kvpair[i]->key);
+    free(pairs->kvpair[i]->value);
     free(pairs->kvpair[i]);
   }
+  free(pairs->kvpair);
   free(pairs);
 }
 

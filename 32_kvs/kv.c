@@ -19,6 +19,19 @@ char *partitionBy(char *line, char *delim) {
   return res;
 }
 
+kvpair_t *getCurrPair(char *line) {
+  char *value = partitionBy(line, "=");
+  assert(value != NULL);
+  kvpair_t *currPair = malloc(sizeof(*currPair)); //an array of kvpair_t
+  currPair->key = malloc((strlen(line) + 1) * sizeof(*currPair->key));
+  currPair->value = malloc((strlen(value) + 1) * sizeof(*currPair->value));
+  strcpy(currPair->key, line);
+  strcpy(currPair->value, value);
+  free(value);
+  return currPair;
+}
+
+
 //you will want to open the file, read the lines of text, split them into
 //key/value pairs, add the resulting pairs to an array (hint: realloc it to make it larger
 //each time), close the file, and return the kvarray_t * that has your array.
@@ -34,32 +47,30 @@ kvarray_t * readKVs(const char * fname) {
   size_t sz = 0;
   char * line = NULL;
   size_t i = 0;
-  char * value = NULL;
+  //char * value = NULL;
   while (getline(&line, &sz, f) >= 0) {
-    value = partitionBy(line, "=");
-    assert(value != NULL);
+    //value = partitionBy(line, "=");
+    //assert(value != NULL);
     
-    kvpair_t * currPair = malloc(sizeof(*currPair));
-    currPair->key = malloc((strlen(line) + 1) * sizeof(currPair->key));
-    currPair->value = malloc((strlen(value) + 1) * sizeof(currPair->value));
-    strcpy(currPair->key, line);
-    strcpy(currPair->value, value);
+    //kvpair_t *currPair = malloc(sizeof(*currPair)); //an array of kvpair_t
+    //currPair->key = malloc((strlen(line) + 1) * sizeof(*currPair->key));
+    //currPair->value = malloc((strlen(value) + 1) * sizeof(*currPair->value));
+    //strcpy(currPair->key, line);
+    //strcpy(currPair->value, value);
 
-    kvArray->kvpair = realloc(kvArray->kvpair, (i + 1) * sizeof(kvpair_t));
-    kvArray->kvpair[i] = currPair; //important currPair has * or not 
+    kvArray->kvpair = realloc(kvArray->kvpair, (i + 1) * sizeof(*kvArray->kvpair));
+    
+    kvArray->kvpair[i] = getCurrPair(line); //*currPair is kvpair_t
+    free(line);  //don't need line anymore because we have already get strcpy key and value according by line
+    line = NULL;
     i++;
     kvArray->numKvpairs = i;
-    
     //free(key);
-    free(value);
-    free(currPair);
+    //free(value);
+    //free(currPair);
   }
   free(line);
-
-  if (fclose(f) != 0) {
-    fprintf(stderr, "Could not close the file");
-    return NULL;
-  }
+  assert(fclose(f) == 0);
   return kvArray;
 }
 
@@ -69,7 +80,7 @@ void freeKVs(kvarray_t * pairs) {
   for (int i = 0; i < pairs->numKvpairs; i++) {
     free(pairs->kvpair[i]->key);
     free(pairs->kvpair[i]->value);
-    //free(pairs->kvpair[i]);
+    free(pairs->kvpair[i]);
   }
   free(pairs->kvpair);
   free(pairs);
@@ -88,7 +99,7 @@ void printKVs(kvarray_t * pairs) {
 char * lookupValue(kvarray_t * pairs, const char * key) {
   //WRITE ME
   for (int i = 0; i < pairs->numKvpairs; i++) {
-    if (strcmp(pairs->kvpair[i]->key, key)) {
+    if (strcmp(pairs->kvpair[i]->key, key) == 0) {
       return pairs->kvpair[i]->value;
     }
   }
