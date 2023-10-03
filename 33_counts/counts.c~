@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "counts.h"
+counts_t * createCounts(void) {
+  //WRITE ME
+  counts_t * aCountArray = malloc(sizeof(*aCountArray));
+  aCountArray->countArray = NULL;
+  aCountArray->arraySize = 0;
+  aCountArray->countUnknown = 0;
+  return aCountArray;
+}
+void addCount(counts_t * c, const char * name) {
+  //WRITE ME
+  if (name == NULL) {
+    c->countUnknown += 1;
+    return;
+  }
+  
+}
+void printCounts(counts_t * c, FILE * outFile) {
+  //WRITE ME
+}
+
+void freeCounts(counts_t * c) {
+  //WRITE ME
+}
