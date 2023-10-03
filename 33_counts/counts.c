@@ -30,11 +30,13 @@ void addCount(counts_t * c, const char * name) {
   newOneCount->string = malloc((strlen(name) + 1) * sizeof(*newOneCount->string));
   strcpy(newOneCount->string, name);
 
-  newOneCount->count = c->arraySize + 1;
+  newOneCount->count = 1;
 
   c->countArray[c->arraySize] = *newOneCount; //has * depend on count_t struct has one_count_t * countArray
                                               //newOneCount if count_t struct has one_count_t ** countArray 
-  free(newOneCount->string);                                            
+  c->arraySize += 1;
+  
+  //free(newOneCount->string);                                            
   free(newOneCount);
 }
 
@@ -53,7 +55,7 @@ void freeCounts(counts_t * c) {
   //WRITE ME
   for (int i = 0; i < c->arraySize; i++) {
     free(c->countArray[i].string);
-    //free(c->countArray[i]);
+    //free(c->countArray[i]); //can't free, because c->countArray[i] is not a pointer point to a one_count_t, itself is a one_count_t, so you cannot free, you free it in addCount
   }
   free(c->countArray);
   free(c);
