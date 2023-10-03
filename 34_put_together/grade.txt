@@ -1,6 +1,6 @@
-Grading at Tue 03 Oct 2023 09:58:58 AM UTC
+Grading at Tue 03 Oct 2023 10:01:31 AM UTC
 Attempting to compile:
-rm -f  outname.o  counts.o  main.o  kv.o count_values *~
+rm -f  counts.o  main.o  outname.o  kv.o count_values *~
 gcc -c -Wall -Werror -std=gnu99 -pedantic -ggdb3 outname.c
 gcc -c -Wall -Werror -std=gnu99 -pedantic -ggdb3 counts.c
 gcc -c -Wall -Werror -std=gnu99 -pedantic -ggdb3 main.c
@@ -30,6 +30,7 @@ counts.o
 count_values
 count_values.stderr
 count_values.stdout
+grade.txt
 kv.c
 kv.h
 kv.o
@@ -79,6 +80,7 @@ counts.o
 count_values
 count_values.stderr
 count_values.stdout
+grade.txt
 kv.c
 kv.h
 kv.o
@@ -131,6 +133,7 @@ counts.o
 count_values
 count_values.stderr
 count_values.stdout
+grade.txt
 kv.c
 kv.h
 kv.o
@@ -183,6 +186,7 @@ counts.o
 count_values
 count_values.stderr
 count_values.stdout
+grade.txt
 kv.c
 kv.h
 kv.o
@@ -234,6 +238,7 @@ counts.o
 count_values
 count_values.stderr
 count_values.stdout
+grade.txt
 kv.c
 kv.h
 kv.o
@@ -287,6 +292,7 @@ counts.o
 count_values
 count_values.stderr
 count_values.stdout
+grade.txt
 kv.c
 kv.h
 kv.o
