@@ -96,3 +96,50 @@ deck_t * make_deck_exclude(deck_t * excluded_cards) {
   free(c);
   return d;
 }
+
+//This function takes an array of hands (remember
+//   that we use deck_t to represent a handa).  It then builds
+//   the deck of cards that remain after those cards have
+//   been removed from a full deck.  For example, if we have
+//   two hands:
+//      Kh Qs ?0 ?1 ?2 ?3 ?4
+//      As Ac ?0 ?1 ?2 ?3 ?4
+//   then this function should build a deck with 48
+//   cards (all but As Ac Kh Qs).  You can just build
+//   one deck with all the cards from all the hands
+//   (remember you just wrote add_card_to),
+//   and then pass it to make_deck_exclude.
+deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
+  deck_t * ans = malloc(sizeof(*ans));
+  deck_t * excludeDeck = malloc(sizeof(*excludeDeck));
+  card_t * c = malloc(sizeof(*c));
+  
+  for (size_t i = 0; i < n_hands; i++) {
+    for (size_t j = 0; j < hands[i]->n_cards; j++) {
+      if (deck_contains(excludeDeck, hands[i]->cards[j]) == 1) {
+	continue;
+      }
+      *c = hands[i]->cards[j];
+      excludeDeck->n_cards += 1;
+      excludeDeck->cards = realloc(excludeDeck->cards, excludeDeck->n_cards * sizeof(*excludeDeck->cards));
+      excludeDeck->cards[excludeDeck->n_cards - 1] = c;
+    }
+  }
+  free(c);
+  ans = make_deck_exclude(excludeDeck);
+  free(excludeDeck);
+  return ans;
+}
+
+//  Free the memory allocated to a deck of cards.
+//  For example, if you do
+//  deck_t * d = make_excluded_deck(something);
+//  free_deck(d);
+//  it should free all the memory allocated by make_excluded_deck.
+void free_deck(deck_t * deck) {
+  for (size_t i = 0; i < deck->n_cards; i++) {
+    free(deck->cards[i]);
+  }
+  free(deck->cards);
+  free(deck);
+}

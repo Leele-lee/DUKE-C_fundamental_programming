@@ -67,10 +67,10 @@ void add_card_to(deck_t * deck, card_t c) {
 //   This will add an invalid card to use as a placeholder
 //   for an unknown card.
 card_t * add_empty_card(deck_t * deck) {
-  card_t * c = malloc(sizeof(*invalidCard));
+  card_t * c = malloc(sizeof(*c));
   c->value = 0;
   c->suit = 0;
-  add_card_to(deck, c);
+  add_card_to(deck, *c);
   return c;
 }
 
@@ -116,10 +116,10 @@ deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
   
   for (size_t i = 0; i < n_hands; i++) {
     for (size_t j = 0; j < hands[i]->n_cards; j++) {
-      if (deck_contains(excludeDeck, hands[i]->cards[j]) == 1) {
+      if (deck_contains(excludeDeck, *hands[i]->cards[j]) == 1) {
 	continue;
       }
-      *c = hands[i]->cards[j];
+      *c = *hands[i]->cards[j];
       excludeDeck->n_cards += 1;
       excludeDeck->cards = realloc(excludeDeck->cards, excludeDeck->n_cards * sizeof(*excludeDeck->cards));
       excludeDeck->cards[excludeDeck->n_cards - 1] = c;
