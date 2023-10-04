@@ -1,0 +1,30 @@
+Grading at Wed 04 Oct 2023 09:31:57 AM UTC
+Compiling deck.c -> deck.o
+deck.c: In function ‘add_empty_card’:
+deck.c:70:31: error: ‘invalidCard’ undeclared (first use in this function)
+   70 |   card_t * c = malloc(sizeof(*invalidCard));
+      |                               ^~~~~~~~~~~
+deck.c:70:31: note: each undeclared identifier is reported only once for each function it appears in
+deck.c:73:21: error: incompatible type for argument 2 of ‘add_card_to’
+   73 |   add_card_to(deck, c);
+      |                     ^
+      |                     |
+      |                     card_t * {aka struct card_tag *}
+deck.c:59:40: note: expected ‘card_t’ {aka ‘struct card_tag’} but argument is of type ‘card_t *’ {aka ‘struct card_tag *’}
+   59 | void add_card_to(deck_t * deck, card_t c) {
+      |                                 ~~~~~~~^
+deck.c: In function ‘build_remaining_deck’:
+deck.c:119:53: error: incompatible type for argument 2 of ‘deck_contains’
+  119 |       if (deck_contains(excludeDeck, hands[i]->cards[j]) == 1) {
+      |                                      ~~~~~~~~~~~~~~~^~~
+      |                                                     |
+      |                                                     card_t * {aka struct card_tag *}
+deck.c:19:38: note: expected ‘card_t’ {aka ‘struct card_tag’} but argument is of type ‘card_t *’ {aka ‘struct card_tag *’}
+   19 | int deck_contains(deck_t * d, card_t c) {
+      |                               ~~~~~~~^
+deck.c:122:12: error: incompatible types when assigning to type ‘card_t’ {aka ‘struct card_tag’} from type ‘card_t *’ {aka ‘struct card_tag *’}
+  122 |       *c = hands[i]->cards[j];
+      |            ^~~~~
+Compilation of deck.c failed
+
+Overall Grade: F
