@@ -2,18 +2,97 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "deck.h"
-void print_hand(deck_t * hand){
 
+//  This should print out the contents of a hand.                                                                                                                                                           
+void print_hand(deck_t * hand){
+  for (size_t i = 0; i < hand->n_cards; i++) {
+    print_card(*hand->cards[i]);
+    printf(" ");
+  }
 }
 
+//   This function should check if a deck                                                                                                                                                                   
+//   contains a particular card or not.  If                                                                                                                                                                 
+//   the deck does contain the card, this                                                                                                                                                                   
+//   function should return 1.  Otherwise,                                                                                                                                                                  
+//   it should return 0.                                                                                                                                                                                    
 int deck_contains(deck_t * d, card_t c) {
+  for (size_t i = 0; i < d->n_cards; i++) {
+    card_t currCard = *d->cards[i];
+    if (currCard.value == c.value && currCard.suit == c.suit) {
+      return 1;
+    }
+  }
   return 0;
 }
-
+// This function takes in a deck an shuffles                                                                                                                                                                
+// it, randomly permuting the order of the cards.                                                                                                                                                           
 void shuffle(deck_t * d){
-
+  card_t oldCard;
+  for (size_t i = 0; i < d->n_cards; i++) {
+    int r = rand() % (d->n_cards);
+    oldCard = *d->cards[i];
+    // because card_t * c = d->cards[i];                                                                                                                                                                    
+    // 表示将指向card_t类型的指针数组中第i个元素                                                                                                                                                            
+    // 的指针赋值给指向card_t类型的指针card                                                                                                                                                                 
+    // so card_t a = *c; or card_t a = *d->cards[i];                                                                                                                                                        
+    *d->cards[i] = *d->cards[r];
+    *d->cards[r] = oldCard;
+  }
 }
 
+//  This function should check that                                                                                                                                                                         
+//  the passed in deck contains ever                                                                                                                                                                        
+//  valid card exactly once.  If                                                                                                                                                                            
+//  the deck has any problems, this function                                                                                                                                                                
+//  should fail an assert.                                                                                                                                                                                  
 void assert_full_deck(deck_t * d) {
+  card_t currCard;
+  for (size_t i = 0; i < 51; i++) {
+    currCard = card_from_num(i);
+    assert(deck_contains(d, currCard) == 1);
+  }
+}
 
+//Add the particular card to the given deck (which will
+//   involve reallocing the array of cards in that deck).
+void add_card_to(deck_t * deck, card_t c) {
+  deck = realloc(deck, (deck->n_cards + 1) * sizeof(*deck));
+  deck->cards[deck->n_cards] = &c;
+  deck->n_cards += 1;
+}
+
+//   Add a card whose value and suit are both 0, and return a pointer
+//   to it in the deck.
+//   This will add an invalid card to use as a placeholder
+//   for an unknown card.
+card_t * add_empty_card(deck_t * deck) {
+  card_t * c = malloc(sizeof(*invalidCard));
+  c->value = 0;
+  c->suit = 0;
+  add_card_to(deck, c);
+  return c;
+}
+
+//   Create a deck that is full EXCEPT for all the cards
+//   that appear in excluded_cards.  For example,
+//   if excluded_cards has Kh and Qs, you would create
+//   a deck with 50 cards---all of them except Kh and Qs.
+//   You will need to use malloc to allocate this deck.
+//   (You will want this for the next function).
+deck_t * make_deck_exclude(deck_t * excluded_cards) {
+  deck_t * d = malloc(sizeof(*d));
+  d->n_cards = 52 - excluded_cards->n_cards;
+ 
+  card_t * c = malloc(sizeof(*c));
+  for (int i = 0; i < 52; i++) {
+    *c = card_from_num(i);
+    if (deck_contains(excluded_cards, *c) == 1) {
+      continue;
+    }
+    d->cards = realloc(d->cards, i + 1);
+    d->cards[i] = c;
+  }
+  free(c);
+  return d;
 }

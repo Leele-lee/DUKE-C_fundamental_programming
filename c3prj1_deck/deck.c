@@ -53,3 +53,93 @@ void assert_full_deck(deck_t * d) {
     assert(deck_contains(d, currCard) == 1);
   }
 }
+
+//Add the particular card to the given deck (which will
+//   involve reallocing the array of cards in that deck).
+void add_card_to(deck_t * deck, card_t c) {
+  deck = realloc(deck, (deck->n_cards + 1) * sizeof(*deck));
+  deck->cards[deck->n_cards] = &c;
+  deck->n_cards += 1;
+}
+
+//   Add a card whose value and suit are both 0, and return a pointer
+//   to it in the deck.
+//   This will add an invalid card to use as a placeholder
+//   for an unknown card.
+card_t * add_empty_card(deck_t * deck) {
+  card_t * c = malloc(sizeof(*invalidCard));
+  c->value = 0;
+  c->suit = 0;
+  add_card_to(deck, c);
+  return c;
+}
+
+//   Create a deck that is full EXCEPT for all the cards
+//   that appear in excluded_cards.  For example,
+//   if excluded_cards has Kh and Qs, you would create
+//   a deck with 50 cards---all of them except Kh and Qs.
+//   You will need to use malloc to allocate this deck.
+//   (You will want this for the next function).
+deck_t * make_deck_exclude(deck_t * excluded_cards) {
+  deck_t * d = malloc(sizeof(*d));
+  d->n_cards = 52 - excluded_cards->n_cards;
+ 
+  card_t * c = malloc(sizeof(*c));
+  for (int i = 0; i < 52; i++) {
+    *c = card_from_num(i);
+    if (deck_contains(excluded_cards, *c) == 1) {
+      continue;
+    }
+    d->cards = realloc(d->cards, i + 1);
+    d->cards[i] = c;
+  }
+  free(c);
+  return d;
+}
+
+//This function takes an array of hands (remember
+//   that we use deck_t to represent a handa).  It then builds
+//   the deck of cards that remain after those cards have
+//   been removed from a full deck.  For example, if we have
+//   two hands:
+//      Kh Qs ?0 ?1 ?2 ?3 ?4
+//      As Ac ?0 ?1 ?2 ?3 ?4
+//   then this function should build a deck with 48
+//   cards (all but As Ac Kh Qs).  You can just build
+//   one deck with all the cards from all the hands
+//   (remember you just wrote add_card_to),
+//   and then pass it to make_deck_exclude.
+deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
+  deck_t * ans = malloc(sizeof(*ans));
+  deck_t * excludeDeck = malloc(sizeof(*excludeDeck));
+  card_t * c = malloc(sizeof(*c));
+  
+  for (size_t i = 0; i < n_hands; i++) {
+    for (size_t j = 0; j < hands[i]->n_cards; j++) {
+      if (deck_contains(excludeDeck, hands[i]->cards[j]) == 1) {
+	continue;
+      }
+      *c = hands[i]->cards[j];
+      excludeDeck->n_cards += 1;
+      excludeDeck->cards = realloc(excludeDeck->cards, excludeDeck->n_cards * sizeof(*excludeDeck->cards));
+      excludeDeck->cards[excludeDeck->n_cards - 1] = c;
+    }
+  }
+  free(c);
+  ans = make_deck_exclude(excludeDeck);
+  free(excludeDeck);
+  return ans;
+}
+
+//  Free the memory allocated to a deck of cards.
+//  For example, if you do
+//  deck_t * d = make_excluded_deck(something);
+//  free_deck(d);
+//  it should free all the memory allocated by make_excluded_deck.
+void free_deck(deck_t * deck) {
+  for (size_t i = 0; i < deck->n_cards; i++) {
+    free(deck->cards[i]);
+  }
+  free(deck->cards);
+  free(deck);
+}
