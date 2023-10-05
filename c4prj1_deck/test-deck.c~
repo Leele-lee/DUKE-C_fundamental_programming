@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "cards.h"
+#include "deck.h"
+#include "eval.h"
+
+int main() {
+  deck_t * deck1 = malloc(sizeof(*deck1));
+  deck_t * deck2 = malloc(sizeof(*deck2));
+  deck_t * deck3 = malloc(sizeof(*deck3));
+
+  deck1->cards = NULL;
+  deck2->cards = NULL;
+  deck3->cards = NULL;
+
+  deck1->n_cards = 0;
+  deck2->n_cards = 0;
+  deck3->n_cards = 0;
+
+  card_t testCard;
+  for (int i = 0; i < 51; i++) {
+    testCard = card_from_num(i);
+    add_card_to(deck1, testCard);
+  }
+  add_empty_card(deck1);
+
+  for (int i = 0; i < 3; i++) {
+    testCard = card_from_num(i);
+    add_card_to(deck2, testCard);
+    deck3 = make_deck_exclude(deck2);
+  }
+  printf("testDeck length is now %zu\n", deck1->n_cards);
+  print_hand(deck1);
+  print_hand(deck3);
+  
+  printf("RUNNING TESTS\n");
+  free_deck(deck1);
+  free_deck(deck2);
+  free_deck(deck3);
+  return 0;
+}

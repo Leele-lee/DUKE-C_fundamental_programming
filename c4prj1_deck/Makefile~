@@ -1,0 +1,23 @@
+
+CFLAGS= -ggdb3 -Wall -Werror -pedantic -std=gnu99 -g
+
+test-deck: deck.o eval.o cards.o test-c4deck.o
+	gcc -o $(CFLAGS) test-deck test-c4deck.c deck.o eval.o cards.o 
+
+deck.o: deck.c
+	gcc -o $(CFLAGS) deck.c
+
+eval.o: eval.c
+	gcc -o $(CFLAGS) eval.c
+
+cards.o: cards.c
+	gcc -o $(CFLAGS) cards.c 
+
+test-c4deck.o: test-c4deck.c
+	gcc -o $(CFLAGS) test-c4deck.c
+
+deck.o: deck.h
+
+eval.o: eval.h
+
+cards.o: cards.h

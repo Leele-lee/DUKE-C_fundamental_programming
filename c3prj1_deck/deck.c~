@@ -4,9 +4,9 @@
 #include "deck.h"
 
 //  This should print out the contents of a hand.                                                                                                                                                           
-void print_hand(deck_t * hand){
+void print_hand(deck_t *hand){
   for (size_t i = 0; i < hand->n_cards; i++) {
-    print_card(*hand->cards[i]);
+    print_card(*(hand->cards[i]));
     printf(" ");
   }
 }
@@ -57,9 +57,12 @@ void assert_full_deck(deck_t * d) {
 //Add the particular card to the given deck (which will
 //   involve reallocing the array of cards in that deck).
 void add_card_to(deck_t * deck, card_t c) {
-  deck = realloc(deck, (deck->n_cards + 1) * sizeof(*deck));
-  deck->cards[deck->n_cards] = &c;
+  deck->cards = realloc(deck->cards, (deck->n_cards + 1) * sizeof(*deck->cards));
+  //deck->cards[deck->n_cards] = &c;
   deck->n_cards += 1;
+  deck->cards[deck->n_cards - 1] = malloc(sizeof(*deck->cards[deck->n_cards - 1]));
+  deck->cards[deck->n_cards - 1]->value = c.value;
+  deck->cards[deck->n_cards - 1]->suit = c.suit;
 }
 
 //   Add a card whose value and suit are both 0, and return a pointer
@@ -67,10 +70,10 @@ void add_card_to(deck_t * deck, card_t c) {
 //   This will add an invalid card to use as a placeholder
 //   for an unknown card.
 card_t * add_empty_card(deck_t * deck) {
-  card_t * c = malloc(sizeof(*invalidCard));
+  card_t * c = malloc(sizeof(*c));
   c->value = 0;
   c->suit = 0;
-  add_card_to(deck, c);
+  add_card_to(deck, *c);
   return c;
 }
 
@@ -83,14 +86,15 @@ card_t * add_empty_card(deck_t * deck) {
 deck_t * make_deck_exclude(deck_t * excluded_cards) {
   deck_t * d = malloc(sizeof(*d));
   d->n_cards = 52 - excluded_cards->n_cards;
- 
+  d->cards = NULL;
+  
   card_t * c = malloc(sizeof(*c));
   for (int i = 0; i < 52; i++) {
     *c = card_from_num(i);
     if (deck_contains(excluded_cards, *c) == 1) {
       continue;
     }
-    d->cards = realloc(d->cards, i + 1);
+    d->cards = realloc(d->cards, (i + 1) * sizeof(*d->cards));
     d->cards[i] = c;
   }
   free(c);
@@ -116,10 +120,10 @@ deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
   
   for (size_t i = 0; i < n_hands; i++) {
     for (size_t j = 0; j < hands[i]->n_cards; j++) {
-      if (deck_contains(excludeDeck, hands[i]->cards[j]) == 1) {
+      if (deck_contains(excludeDeck, *hands[i]->cards[j]) == 1) {
 	continue;
       }
-      *c = hands[i]->cards[j];
+      *c = *hands[i]->cards[j];
       excludeDeck->n_cards += 1;
       excludeDeck->cards = realloc(excludeDeck->cards, excludeDeck->n_cards * sizeof(*excludeDeck->cards));
       excludeDeck->cards[excludeDeck->n_cards - 1] = c;
@@ -130,6 +134,7 @@ deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
   free(excludeDeck);
   return ans;
 }
+      
 
 //  Free the memory allocated to a deck of cards.
 //  For example, if you do
@@ -137,8 +142,10 @@ deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
 //  free_deck(d);
 //  it should free all the memory allocated by make_excluded_deck.
 void free_deck(deck_t * deck) {
-  for (size_t i = 0; i < deck->n_cards; i++) {
-    free(deck->cards[i]);
+  if (deck != NULL) {
+    for (size_t i = 0; i < deck->n_cards; i++) {
+      free(deck->cards[i]);
+    }
   }
   free(deck->cards);
   free(deck);
