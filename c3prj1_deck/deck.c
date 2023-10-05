@@ -130,7 +130,7 @@ deck_t * make_deck_exclude(deck_t * excluded_cards){
 //   one deck with all the cards from all the hands
 //   (remember you just wrote add_card_to),
 //   and then pass it to make_deck_exclude.
-deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
+/*deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
   deck_t * ans = malloc(sizeof(*ans));
   deck_t * excludeDeck = malloc(sizeof(*excludeDeck));
   card_t * c = malloc(sizeof(*c));
@@ -149,6 +149,21 @@ deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
   free(c);
   ans = make_deck_exclude(excludeDeck);
   free(excludeDeck);
+  return ans;
+  }*/
+
+deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
+  deck_t * excludeD = malloc(sizeof(*excludeD));
+  excludeD->n_cards = 0;
+  excludeD->cards = NULL;
+  for (size_t i = 0; i < n_hands; i++) {
+    deck_t * oneHand = hands[i];
+    for (size_t j = 0; j < oneHand->n_cards; j++) {
+      add_card_to(excludeD, *oneHand->cards[j]);
+    }
+  }
+  deck_t * ans = make_deck_exclude(excludeD);
+  free_deck(excludeD);
   return ans;
 }
       
