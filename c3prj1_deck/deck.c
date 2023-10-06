@@ -99,6 +99,7 @@ card_t * add_empty_card(deck_t * deck) {
     }
     d->cards = realloc(d->cards, (i + 1) * sizeof(*d->cards));
     d->cards[i] = c;
+    c = NULL;
   }
   free(c);
   return d;
