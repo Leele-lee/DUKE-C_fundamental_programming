@@ -44,8 +44,8 @@ void future_cards_from_deck(deck_t * deck, future_cards_t * fc) {
       assert(currD.n_cards != 0);
     }
     for (size_t j = 0; j < currD.n_cards; j++) {
-      currD.cards[j]->value = deck[i].cards->value;
-      currD.cards[j]->suit = deck[i].cards->suit;
+      currD.cards[j]->value = deck->cards[i]->value;
+      currD.cards[j]->suit = deck->cards[i]->suit;
     }
   }
 }
