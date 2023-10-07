@@ -19,7 +19,7 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
   deck_t * d = malloc(sizeof(*d));
   d->n_cards = 0;
   d->cards = NULL;
-  char * line = malloc(strlen(str) * sizeof(*line));
+  char * line = malloc((strlen(str) + 1) * sizeof(*line));
   strcpy(line, str);
   card_t * c = malloc(sizeof(*c));
   // get card info which is limit by ' '
