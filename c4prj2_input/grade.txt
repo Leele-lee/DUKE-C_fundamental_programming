@@ -1,4 +1,4 @@
-Grading at Sat 07 Oct 2023 11:12:49 AM UTC
+Grading at Sat 07 Oct 2023 02:21:56 PM UTC
 Compiling cards.c -> cards.o
 Compiling deck.c -> deck.o
 Compiling input.c -> input.o
@@ -7,311 +7,77 @@ Linking input.o, future.o deck.o, cards.o, and our tester
 Testing with input file with 
  o 1 hand
  o No unknown/future cards
-Valgrind reported errors:
-==225== Memcheck, a memory error detector
-==225== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==225== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==225== Command: ./tester hands.txt draw.txt
-==225== Parent PID: 224
-==225== 
-==225== Invalid write of size 1
-==225==    at 0x483F0BE: strcpy (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==225==    by 0x1093EC: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==225==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==225==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==225==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==225== 
-==225== Invalid read of size 1
-==225==    at 0x4843E6C: strcspn (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==225==    by 0x48F34ED: strtok_r (strtok_r.c:64)
-==225==    by 0x1094B3: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==225==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==225==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==225==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==225== 
-==225== Invalid read of size 1
-==225==    at 0x48F34F1: strtok_r (strtok_r.c:65)
-==225==    by 0x1094B3: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==225==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==225==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==225==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==225== 
-==225== Invalid read of size 1
-==225==    at 0x48F34C7: strtok_r (strtok_r.c:49)
-==225==    by 0x1094B3: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==225==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==225==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==225==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==225==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==225== 
-==225== 
-==225== HEAP SUMMARY:
-==225==     in use at exit: 8 bytes in 1 blocks
-==225==   total heap usage: 29 allocs, 28 frees, 10,773 bytes allocated
-==225== 
-==225== LEAK SUMMARY:
-==225==    definitely lost: 8 bytes in 1 blocks
-==225==    indirectly lost: 0 bytes in 0 blocks
-==225==      possibly lost: 0 bytes in 0 blocks
-==225==    still reachable: 0 bytes in 0 blocks
-==225==         suppressed: 0 bytes in 0 blocks
-==225== Rerun with --leak-check=full to see details of leaked memory
-==225== 
-==225== For lists of detected and suppressed errors, rerun with: -s
-==225== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+Your file matched the expected output
+Test case passed
 Testing with input file with 
  o Many hands
  o No unknown/future cards
-Valgrind reported errors:
-==230== Memcheck, a memory error detector
-==230== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==230== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==230== Command: ./tester hands.txt draw.txt
-==230== Parent PID: 229
-==230== 
-==230== Invalid write of size 1
-==230==    at 0x483F0BE: strcpy (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==230==    by 0x1093EC: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==230==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==230==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==230==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==230== 
-==230== Invalid read of size 1
-==230==    at 0x4843E6C: strcspn (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==230==    by 0x48F34ED: strtok_r (strtok_r.c:64)
-==230==    by 0x1094B3: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==230==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==230==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==230==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==230== 
-==230== Invalid read of size 1
-==230==    at 0x48F34F1: strtok_r (strtok_r.c:65)
-==230==    by 0x1094B3: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==230==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==230==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==230==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==230== 
-==230== Invalid read of size 1
-==230==    at 0x48F34C7: strtok_r (strtok_r.c:49)
-==230==    by 0x1094B3: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==230==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==230==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==230==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==230==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==230== 
-==230== 
-==230== HEAP SUMMARY:
-==230==     in use at exit: 32 bytes in 4 blocks
-==230==   total heap usage: 83 allocs, 79 frees, 4,140 bytes allocated
-==230== 
-==230== LEAK SUMMARY:
-==230==    definitely lost: 32 bytes in 4 blocks
-==230==    indirectly lost: 0 bytes in 0 blocks
-==230==      possibly lost: 0 bytes in 0 blocks
-==230==    still reachable: 0 bytes in 0 blocks
-==230==         suppressed: 0 bytes in 0 blocks
-==230== Rerun with --leak-check=full to see details of leaked memory
-==230== 
-==230== For lists of detected and suppressed errors, rerun with: -s
-==230== ERROR SUMMARY: 16 errors from 4 contexts (suppressed: 0 from 0)
+Your file matched the expected output
+Test case passed
 Testing with input file with 
  o Many hands
  o 1 unknown/future cards per hand
-Valgrind reported errors:
-==236== Memcheck, a memory error detector
-==236== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==236== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==236== Command: ./tester h.txt d.txt
-==236== Parent PID: 235
-==236== 
-==236== Invalid write of size 1
-==236==    at 0x483F0BE: strcpy (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==236==    by 0x1093EC: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==236==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==236==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==236==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==236== 
-==236== Invalid read of size 1
-==236==    at 0x4843E6C: strcspn (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==236==    by 0x48F34ED: strtok_r (strtok_r.c:64)
-==236==    by 0x1094B3: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==236==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==236==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==236==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==236== 
-==236== Invalid read of size 1
-==236==    at 0x48F34F1: strtok_r (strtok_r.c:65)
-==236==    by 0x1094B3: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==236==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==236==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==236==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==236== 
-==236== Invalid read of size 1
-==236==    at 0x48F34C7: strtok_r (strtok_r.c:49)
-==236==    by 0x1094B3: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==236==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==236==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==236==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==236==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==236== 
-==236== 
-==236== HEAP SUMMARY:
-==236==     in use at exit: 64 bytes in 8 blocks
-==236==   total heap usage: 131 allocs, 123 frees, 4,916 bytes allocated
-==236== 
-==236== LEAK SUMMARY:
-==236==    definitely lost: 64 bytes in 8 blocks
-==236==    indirectly lost: 0 bytes in 0 blocks
-==236==      possibly lost: 0 bytes in 0 blocks
-==236==    still reachable: 0 bytes in 0 blocks
-==236==         suppressed: 0 bytes in 0 blocks
-==236== Rerun with --leak-check=full to see details of leaked memory
-==236== 
-==236== For lists of detected and suppressed errors, rerun with: -s
-==236== ERROR SUMMARY: 16 errors from 4 contexts (suppressed: 0 from 0)
+Line_2_did_not_match
+Line_3_did_not_match
+Line_4_did_not_match
+Line_5_did_not_match
+Line_7_did_not_match
+Line_8_did_not_match
+Line_9_did_not_match
+Line_10_did_not_match
+Line_12_did_not_match
+Line_13_did_not_match
+Line_14_did_not_match
+Line_15_did_not_match
+Line_17_did_not_match
+Line_18_did_not_match
+Line_19_did_not_match
+Line_20_did_not_match
+Your file did not match the expected ouput
+Test case failed
 Testing with input file with 
  o Many hands
  o Many unknown/future cards per hand
 Valgrind reported errors:
-==242== Memcheck, a memory error detector
-==242== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==242== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==242== Command: ./tester i1 i2
-==242== Parent PID: 241
-==242== 
-==242== Invalid write of size 1
-==242==    at 0x483F0BE: strcpy (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==242==    by 0x1093EC: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==242==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==242==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==242==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==242== 
-==242== Invalid read of size 1
-==242==    at 0x4843E6C: strcspn (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==242==    by 0x48F34ED: strtok_r (strtok_r.c:64)
-==242==    by 0x1094B3: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==242==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==242==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==242==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==242== 
-==242== Invalid read of size 1
-==242==    at 0x48F34F1: strtok_r (strtok_r.c:65)
-==242==    by 0x1094B3: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==242==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==242==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==242==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==242== 
-==242== Invalid read of size 1
-==242==    at 0x48F34C7: strtok_r (strtok_r.c:49)
-==242==    by 0x1094B3: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==242==  Address 0x4a45615 is 0 bytes after a block of size 21 alloc'd
-==242==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==242==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==242== 
-==242== Invalid read of size 1
-==242==    at 0x10942D: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==242==  Address 0x4a46a79 is 0 bytes after a block of size 25 alloc'd
-==242==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==242==    by 0x1093D5: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==242== 
-==242== Conditional jump or move depends on uninitialised value(s)
-==242==    at 0x109E3D: assert_card_valid (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A174: card_from_letters (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10944A: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==242== 
-==242== 
-==242== Process terminating with default action of signal 6 (SIGABRT): dumping core
-==242==    at 0x489618B: raise (raise.c:51)
-==242==    by 0x4875858: abort (abort.c:79)
-==242==    by 0x4875728: __assert_fail_base.cold (assert.c:92)
-==242==    by 0x4886F35: __assert_fail (assert.c:101)
-==242==    by 0x109E65: assert_card_valid (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A174: card_from_letters (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10944A: hand_from_string (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x1095D6: read_input (in /graderhome/work/c4prj2_input/tester)
-==242==    by 0x10A5D5: main (in /graderhome/work/c4prj2_input/tester)
-==242== 
-==242== HEAP SUMMARY:
-==242==     in use at exit: 1,369 bytes in 55 blocks
-==242==   total heap usage: 91 allocs, 36 frees, 3,143 bytes allocated
-==242== 
-==242== LEAK SUMMARY:
-==242==    definitely lost: 24 bytes in 3 blocks
-==242==    indirectly lost: 0 bytes in 0 blocks
-==242==      possibly lost: 0 bytes in 0 blocks
-==242==    still reachable: 1,345 bytes in 52 blocks
-==242==         suppressed: 0 bytes in 0 blocks
-==242== Rerun with --leak-check=full to see details of leaked memory
-==242== 
-==242== Use --track-origins=yes to see where uninitialised values come from
-==242== For lists of detected and suppressed errors, rerun with: -s
-==242== ERROR SUMMARY: 13 errors from 6 contexts (suppressed: 0 from 0)
+==272== Memcheck, a memory error detector
+==272== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==272== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==272== Command: ./tester i1 i2
+==272== Parent PID: 271
+==272== 
+==272== Conditional jump or move depends on uninitialised value(s)
+==272==    at 0x109E41: assert_card_valid (in /graderhome/work/c4prj2_input/tester)
+==272==    by 0x10A178: card_from_letters (in /graderhome/work/c4prj2_input/tester)
+==272==    by 0x10944E: hand_from_string (in /graderhome/work/c4prj2_input/tester)
+==272==    by 0x1095DA: read_input (in /graderhome/work/c4prj2_input/tester)
+==272==    by 0x10A5D9: main (in /graderhome/work/c4prj2_input/tester)
+==272== 
+==272== 
+==272== Process terminating with default action of signal 6 (SIGABRT): dumping core
+==272==    at 0x489618B: raise (raise.c:51)
+==272==    by 0x4875858: abort (abort.c:79)
+==272==    by 0x4875728: __assert_fail_base.cold (assert.c:92)
+==272==    by 0x4886F35: __assert_fail (assert.c:101)
+==272==    by 0x109E69: assert_card_valid (in /graderhome/work/c4prj2_input/tester)
+==272==    by 0x10A178: card_from_letters (in /graderhome/work/c4prj2_input/tester)
+==272==    by 0x10944E: hand_from_string (in /graderhome/work/c4prj2_input/tester)
+==272==    by 0x1095DA: read_input (in /graderhome/work/c4prj2_input/tester)
+==272==    by 0x10A5D9: main (in /graderhome/work/c4prj2_input/tester)
+==272== 
+==272== HEAP SUMMARY:
+==272==     in use at exit: 1,370 bytes in 55 blocks
+==272==   total heap usage: 91 allocs, 36 frees, 3,146 bytes allocated
+==272== 
+==272== LEAK SUMMARY:
+==272==    definitely lost: 24 bytes in 3 blocks
+==272==    indirectly lost: 0 bytes in 0 blocks
+==272==      possibly lost: 0 bytes in 0 blocks
+==272==    still reachable: 1,346 bytes in 52 blocks
+==272==         suppressed: 0 bytes in 0 blocks
+==272== Rerun with --leak-check=full to see details of leaked memory
+==272== 
+==272== Use --track-origins=yes to see where uninitialised values come from
+==272== For lists of detected and suppressed errors, rerun with: -s
+==272== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 
-Overall Grade: F
+Overall Grade: C
