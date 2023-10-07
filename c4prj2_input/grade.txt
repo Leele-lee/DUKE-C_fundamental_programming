@@ -1,14 +1,7 @@
-Grading at Sat 07 Oct 2023 02:46:50 AM UTC
+Grading at Sat 07 Oct 2023 03:21:30 AM UTC
 Compiling cards.c -> cards.o
 Compiling deck.c -> deck.o
 Compiling input.c -> input.o
-input.c: In function ‘hand_from_string’:
-input.c:20:4: error: ‘deck_t’ {aka ‘struct deck_tag’} has no member named ‘n_decks’
-   20 |   d->n_decks = 0;
-      |    ^~
-input.c:21:4: error: ‘deck_t’ {aka ‘struct deck_tag’} has no member named ‘decks’
-   21 |   d->decks = NULL;
-      |    ^~
 input.c: In function ‘read_input’:
 input.c:65:6: error: ‘n’ undeclared (first use in this function)
    65 |     *n-hands = i;
