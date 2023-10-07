@@ -62,7 +62,7 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
     assert(ans[i]->n_cards != 0);
 
     i++;
-    *n-hands = i;
+    *n->hands = i;
   }
   free(line);
   return ans;
