@@ -17,8 +17,8 @@
 //   and parse it into a hand:
 deck_t * hand_from_string(const char * str, future_cards_t * fc) {
   deck_t * d = malloc(sizeof(*d));
-  d->n_decks = 0;
-  d->decks = NULL;
+  d->n_cards = 0;
+  d->cards = NULL;
   char * line = malloc(strlen(str) * sizeof(*line));
   strcpy(line, str);
   card_t * c = malloc(sizeof(*c));
