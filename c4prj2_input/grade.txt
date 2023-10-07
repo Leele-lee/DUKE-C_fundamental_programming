@@ -1,15 +1,17 @@
-Grading at Sat 07 Oct 2023 03:26:01 AM UTC
+Grading at Sat 07 Oct 2023 03:29:29 AM UTC
 Compiling cards.c -> cards.o
 Compiling deck.c -> deck.o
 Compiling input.c -> input.o
 Compiling future.c -> future.o
 future.c: In function ‘future_cards_from_deck’:
-future.c:47:38: error: ‘deck_t’ {aka ‘struct deck_tag’} has no member named ‘value’
-   47 |       currD.cards[j]->value = deck[i].value;
-      |                                      ^
-future.c:48:37: error: ‘deck_t’ {aka ‘struct deck_tag’} has no member named ‘suit’
-   48 |       currD.cards[j]->suit = deck[i].suit;
-      |                                     ^
+future.c:47:44: error: ‘*(deck + (sizetype)(i * 16))->cards’ is a pointer; did you mean to use ‘->’?
+   47 |       currD.cards[j]->value = deck[i].cards->value;
+      |                                            ^~
+      |                                            ->
+future.c:48:43: error: ‘*(deck + (sizetype)(i * 16))->cards’ is a pointer; did you mean to use ‘->’?
+   48 |       currD.cards[j]->suit = deck[i].cards->suit;
+      |                                           ^~
+      |                                           ->
 Compilation of future.c failed
 
 Overall Grade: F
