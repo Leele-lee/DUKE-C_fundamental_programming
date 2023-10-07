@@ -17,6 +17,8 @@
 //   and parse it into a hand:
 deck_t * hand_from_string(const char * str, future_cards_t * fc) {
   deck_t * d = malloc(sizeof(*d));
+  d->n_decks = 0;
+  d->decks = NULL;
   char * line = malloc(strlen(str) * sizeof(*line));
   strcpy(line, str);
   card_t * c = malloc(sizeof(*c));
@@ -42,7 +44,7 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
   }
   free(line);
   if (i < 5) {
-    fprintf(stderr, "Error: Invalid number of cards in input file\n");
+    fprintf(stderr, "Hands smaller than 5 cards\n");
     assert(i >= 5);
   }
   return d;
@@ -50,10 +52,18 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
 
 deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
   assert(f != NULL);
-  char * curr = NULL;
+  deck_t ** ans = NULL;
+  char * line = NULL;
   size_t sz;
   size_t i = 0;
-  while (getline(&curr, &sz, f) >= 0) {
-    
+  while (getline(&line, &sz, f) >= 0) {
+    ans = realloc(ans, (i + 1) * sizeof(*ans));
+    ans[i] = hand_from_string(line, fc);
+    assert(ans[i]->n_cards != 0);
+
+    i++;
+    *n-hands = i;
   }
+  free(line);
+  return ans;
 }
