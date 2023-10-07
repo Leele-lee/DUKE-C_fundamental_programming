@@ -18,6 +18,13 @@ int main() {
     print_hand(ans[i]);
   }
  
+  for (size_t i = 0; i < n_hands; i++) {
+    /*for (size_t j = 0; j < ans[i]->n_cards; j++) {
+      free(ans[i]->cards[j]);
+    }*/
+    free_deck(ans[i]);
+  }
+  
   free(fc);
   free(ans);
   return 0;
