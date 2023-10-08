@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
+#include <ctype.h>
 #include "deck.h"
 #include "future.h"
 #include "input.h"
@@ -21,7 +22,7 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
   d->cards = NULL;
   char * line = malloc((strlen(str) + 1) * sizeof(*line));
   strcpy(line, str);
-  card_t * c = malloc(sizeof(*c));
+  //card_t * c = malloc(sizeof(*c));
   // get card info which is limit by ' '
   char * info;
   info = strtok(line, " ");
@@ -31,13 +32,13 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
     char value = info[0];
     char suit = info[1];
     if (value != '?') {
-      *c = card_from_letters(value, suit);
+      card_t c = card_from_letters(value, suit);
       //d->cards = realloc((i + 1) * sizeof(*d->cards));
-      add_card_to(d, *c);
+      add_card_to(d, c);
     } else {
-      c = add_empty_card(d);
+      //c = add_empty_card(d);
       size_t index = suit - '0'; //change char into size_t
-      add_future_card(fc, index, c);
+      add_future_card(fc, index, add_empty_card(d));
     }
     i++;
     info = strtok(NULL, " ");
@@ -67,3 +68,5 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
   free(line);
   return ans;
 }
+
+

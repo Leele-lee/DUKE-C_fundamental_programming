@@ -19,9 +19,9 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
   deck_t * d = malloc(sizeof(*d));
   d->n_cards = 0;
   d->cards = NULL;
-  char * line = malloc(strlen(str) * sizeof(*line));
+  char * line = malloc((strlen(str) + 1) * sizeof(*line));
   strcpy(line, str);
-  card_t * c = malloc(sizeof(*c));
+  //card_t * c = malloc(sizeof(*c));
   // get card info which is limit by ' '
   char * info;
   info = strtok(line, " ");
@@ -31,13 +31,13 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
     char value = info[0];
     char suit = info[1];
     if (value != '?') {
-      *c = card_from_letters(value, suit);
+      card_t c = card_from_letters(value, suit);
       //d->cards = realloc((i + 1) * sizeof(*d->cards));
-      add_card_to(d, *c);
+      add_card_to(d, c);
     } else {
-      c = add_empty_card(d);
+      //c = add_empty_card(d);
       size_t index = suit - '0'; //change char into size_t
-      add_future_card(fc, index, c);
+      add_future_card(fc, index, add_empty_card(d));
     }
     i++;
     info = strtok(NULL, " ");
@@ -50,7 +50,7 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
   return d;
 }
 
-deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
+/*deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
   assert(f != NULL);
   deck_t ** ans = NULL;
   char * line = NULL;
@@ -66,4 +66,31 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
   }
   free(line);
   return ans;
+  }*/
+deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc){
+  assert(f!=NULL);
+  size_t num = 0;
+  size_t sz = 0;
+  char * line = NULL;
+  deck_t ** r_deck = NULL;
+  while(getline(&line, &sz, f)!=EOF){
+
+    // create a hand from each valid line in file
+    r_deck=realloc(r_deck,sizeof(* r_deck)*(num+1));
+    deck_t * temp = hand_from_string(line,fc);
+    if (temp!=NULL){
+      // import "temp" to returned deck
+      r_deck[num]=temp;
+      num++;
+    }else{
+      // if line invalid go to next line or end if EOF
+      continue;
+    }
+    
+    
+  }
+  * n_hands = num;
+  free(line);
+  return r_deck;
 }
+
