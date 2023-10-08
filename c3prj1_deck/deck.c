@@ -112,7 +112,7 @@ deck_t * make_deck_exclude(deck_t * excluded_cards){
   
   for (int i = 0; i < 52; i++) {
     card_t c = card_from_num(i);
-    if (deck_contains(excluded_cards, c) == 0) {
+    if (excluded_cards == NULL || !deck_contains(excluded_cards, c)) {
       add_card_to(d, c);
     }
   }

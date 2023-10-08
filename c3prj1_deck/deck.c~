@@ -60,9 +60,12 @@ void add_card_to(deck_t * deck, card_t c) {
   deck->cards = realloc(deck->cards, (deck->n_cards + 1) * sizeof(*deck->cards));
   //deck->cards[deck->n_cards] = &c;
   deck->n_cards += 1;
-  deck->cards[deck->n_cards - 1] = malloc(sizeof(*deck->cards[deck->n_cards - 1]));
-  deck->cards[deck->n_cards - 1]->value = c.value;
-  deck->cards[deck->n_cards - 1]->suit = c.suit;
+  card_t * tmpC = malloc(sizeof(*tmpC));
+  tmpC->value = c.value;
+  tmpC->suit = c.suit;
+  deck->cards[deck->n_cards - 1] = tmpC;
+  // deck->cards[deck->n_cards - 1]->value = c.value;
+  //deck->cards[deck->n_cards - 1]->suit = c.suit;
 }
 
 //   Add a card whose value and suit are both 0, and return a pointer
@@ -83,7 +86,7 @@ card_t * add_empty_card(deck_t * deck) {
 //   a deck with 50 cards---all of them except Kh and Qs.
 //   You will need to use malloc to allocate this deck.
 //   (You will want this for the next function).
-deck_t * make_deck_exclude(deck_t * excluded_cards) {
+/*deck_t * make_deck_exclude(deck_t * excluded_cards) {
   deck_t * d = malloc(sizeof(*d));
   d->n_cards = 52 - excluded_cards->n_cards;
   d->cards = NULL;
@@ -96,8 +99,23 @@ deck_t * make_deck_exclude(deck_t * excluded_cards) {
     }
     d->cards = realloc(d->cards, (i + 1) * sizeof(*d->cards));
     d->cards[i] = c;
+    c = NULL;
   }
   free(c);
+  return d;
+  }*/
+
+deck_t * make_deck_exclude(deck_t * excluded_cards){
+  deck_t * d = malloc(sizeof(*d));
+  d->n_cards = 0;
+  d->cards = NULL;
+  
+  for (int i = 0; i < 52; i++) {
+    card_t c = card_from_num(i);
+    if (deck_contains(excluded_cards, c) == 0) {
+      add_card_to(d, c);
+    }
+  }
   return d;
 }
 
@@ -113,7 +131,7 @@ deck_t * make_deck_exclude(deck_t * excluded_cards) {
 //   one deck with all the cards from all the hands
 //   (remember you just wrote add_card_to),
 //   and then pass it to make_deck_exclude.
-deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
+/*deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
   deck_t * ans = malloc(sizeof(*ans));
   deck_t * excludeDeck = malloc(sizeof(*excludeDeck));
   card_t * c = malloc(sizeof(*c));
@@ -132,6 +150,21 @@ deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
   free(c);
   ans = make_deck_exclude(excludeDeck);
   free(excludeDeck);
+  return ans;
+  }*/
+
+deck_t * build_remaining_deck(deck_t ** hands, size_t n_hands) {
+  deck_t * excludeD = malloc(sizeof(*excludeD));
+  excludeD->n_cards = 0;
+  excludeD->cards = NULL;
+  for (size_t i = 0; i < n_hands; i++) {
+    deck_t * oneHand = hands[i];
+    for (size_t j = 0; j < oneHand->n_cards; j++) {
+      add_card_to(excludeD, *oneHand->cards[j]);
+    }
+  }
+  deck_t * ans = make_deck_exclude(excludeD);
+  free_deck(excludeD);
   return ans;
 }
       
