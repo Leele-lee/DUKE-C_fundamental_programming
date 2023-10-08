@@ -27,7 +27,7 @@ deck_t * hand_from_string(const char * str, future_cards_t * fc) {
   char * info;
   info = strtok(line, " ");
   size_t i = 0;
-  while (info != NULL) {
+  while (info != NULL || strlen(info) < 2) {
     //assert(strlen(info) == 2);
     char value = info[0];
     char suit = info[1];
