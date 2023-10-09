@@ -1,7 +1,13 @@
 CFLAGS= -ggdb3 -Wall -Werror -pedantic -std=gnu99 -g
 
-test-deck: deck.o eval.o cards.o test-deck.o
-	gcc -o test-deck test-deck.c deck.o eval.o cards.o $(CLAGS) 
+test-future: input.o future.o deck.o eval.o cards.o test-future.o
+	gcc -o test-future test-future.c input.o future.o deck.o eval.o cards.o $(CLAGS) 
+
+input.o:input.c
+	gcc -c input.c $(CFLAGS)
+
+future.o:future.c
+	gcc -c future.c $(CFLAGS)
 
 deck.o: deck.c
 	gcc -c deck.c $(CFLAGS)
@@ -12,8 +18,8 @@ eval.o: eval.c
 cards.o: cards.c
 	gcc -c cards.c $(CFLAGS)
 
-test-deck.o: test-deck.c
-	gcc -c test-deck.c $(CFLAGS)
+test-future.o: test-future.c
+	gcc -c test-future.c $(CFLAGS)
 
 deck.o:deck.h
 eval.o:eval.h

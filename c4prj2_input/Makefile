@@ -1,28 +1,21 @@
-CFLAGS= -ggdb3 -Wall -Werror -pedantic -std=gnu99 -g
-
-test-future: input.o future.o deck.o eval.o cards.o test-future.o
-	gcc -o test-future test-future.c input.o future.o deck.o eval.o cards.o $(CLAGS) 
-
-input.o:input.c
-	gcc -c input.c $(CFLAGS)
-
-future.o:future.c
-	gcc -c future.c $(CFLAGS)
-
+CFLAGS =-std=gnu99 -ggdb3 -pedantic -Wall -Werror
+# test-future: test-future.o cards.o deck.o eval.o future.o input.o
+# 	gcc $(CFLAGS) -o $@ $^
+# test-future.o: test-future.c 
+# 	gcc -c $< $(CFLAGS)
+test-input: test-input.o cards.o deck.o eval.o future.o input.o
+	gcc $(CFLAGS) -o $@ $^
+test-input.o: test-input.c 
+	gcc -c $< $(CFLAGS)
 deck.o: deck.c
-	gcc -c deck.c $(CFLAGS)
-
+	gcc -c $< $(CFLAGS)
 eval.o: eval.c
-	gcc -c eval.c $(CFLAGS)
-
+	gcc -c $< $(CFLAGS)
 cards.o: cards.c
-	gcc -c cards.c $(CFLAGS)
-
-test-future.o: test-future.c
-	gcc -c test-future.c $(CFLAGS)
-
-deck.o:deck.h
-eval.o:eval.h
-cards.o:cards.h
-future.o:future.h
-input.o:input.h
+	gcc -c $< $(CFLAGS)
+future.o: future.c
+	gcc -c $< $(CFLAGS)
+input.o: input.c
+	gcc -c $< $(CFLAGS)
+clean:
+	rm -rf *.o test_c4 *~ test-future test-input
