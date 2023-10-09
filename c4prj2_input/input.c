@@ -59,12 +59,18 @@ deck_t ** read_input(FILE * f, size_t * n_hands, future_cards_t * fc) {
   size_t i = 0;
   while (getline(&line, &sz, f) >= 0) {
     ans = realloc(ans, (i + 1) * sizeof(*ans));
-    ans[i] = hand_from_string(line, fc);
-    assert(ans[i]->n_cards != 0);
-
-    i++;
-    *n_hands = i;
+    deck_t * temp = hand_from_string(line, fc);
+    if (temp != NULL) {
+      ans[i] = temp;
+      i++;
+    } else {
+      continue;
+    }
+    //    ans[i] = hand_from_string(line, fc);
+    //    assert(ans[i]->n_cards != 0);
+    
   }
+  *n_hands = i;
   free(line);
   return ans;
 }
