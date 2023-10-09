@@ -50,7 +50,6 @@ char suit_letter(card_t c) {
   case HEARTS: return 'h';
   case DIAMONDS: return 'd';
   case CLUBS: return 'c';
-  case NUM_SUITS: return 'n';
   default: return '?';
   }
 }
