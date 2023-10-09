@@ -1,4 +1,4 @@
-Grading at Mon 09 Oct 2023 03:10:26 AM UTC
+Grading at Mon 09 Oct 2023 03:12:37 AM UTC
 Compiling cards.c -> cards.o
 Compiling deck.c -> deck.o
 Compiling input.c -> input.o
