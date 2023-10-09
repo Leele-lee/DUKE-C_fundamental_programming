@@ -3,9 +3,9 @@ CFLAGS =-std=gnu99 -ggdb3 -pedantic -Wall -Werror
 # 	gcc $(CFLAGS) -o $@ $^
 # test-future.o: test-future.c 
 # 	gcc -c $< $(CFLAGS)
-test-input: test-input.o cards.o deck.o eval.o future.o input.o
+test-future: test-future.o cards.o deck.o eval.o future.o input.o
 	gcc $(CFLAGS) -o $@ $^
-test-input.o: test-input.c 
+test-future.o: test-future.c 
 	gcc -c $< $(CFLAGS)
 deck.o: deck.c
 	gcc -c $< $(CFLAGS)

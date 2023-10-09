@@ -4,7 +4,10 @@
 #include "deck.h"
 
 //  This should print out the contents of a hand.                                                                                                                                                           
-void print_hand(deck_t *hand){
+void print_hand(deck_t * hand){
+  if (hand == NULL) {
+    return;
+  }
   for (size_t i = 0; i < hand->n_cards; i++) {
     print_card(*(hand->cards[i]));
     printf(" ");
@@ -73,11 +76,14 @@ void add_card_to(deck_t * deck, card_t c) {
 //   This will add an invalid card to use as a placeholder
 //   for an unknown card.
 card_t * add_empty_card(deck_t * deck) {
-  card_t * c = malloc(sizeof(*c));
-  c->value = 0;
-  c->suit = 0;
-  add_card_to(deck, *c);
-  return c;
+  //  card_t * c = malloc(sizeof(*c));
+  //  c->value = 0;
+  //  c->suit = 0;
+  //  add_card_to(deck, *c); in this method return c is not the same as add deck's c, because in add_card_to malloc a new card_t * c 
+  //  return c;
+  card_t c = {0, NUM_SUITS};
+  add_card_to(deck, c);
+  return deck->cards[deck->n_cards - 1];
 }
 
 //   Create a deck that is full EXCEPT for all the cards
