@@ -34,7 +34,7 @@ void add_future_card(future_cards_t * fc, size_t index, card_t * ptr) {
 //   all the pointers to placeholders) and draws cards from
 //   the deck and assigns their values and suits to the
 //   placeholders pointed to in fc.
-void future_cards_from_deck(deck_t * deck, future_cards_t * fc) {
+/*void future_cards_from_deck(deck_t * deck, future_cards_t * fc) {
   assert(deck != NULL);
   assert(fc != NULL);
   for (size_t i = 0; i < fc->n_decks; i++) {
@@ -49,9 +49,23 @@ void future_cards_from_deck(deck_t * deck, future_cards_t * fc) {
     }
   }
 }
+*/
 
 
-
-
+void future_cards_from_deck(deck_t * deck, future_cards_t * fc){
+  //error cheching
+  if (deck->n_cards< fc->n_decks){
+    fprintf(stderr,"future_cards_from_deck");
+    return;
+  }
+  //initalization
+  for(int i=0 ;i<fc->n_decks;i++){
+    if(fc->decks[i].n_cards == 0) continue;
+    for(int x=0 ;x<fc->decks[i].n_cards ;x++){
+      (*(fc->decks[i].cards[x])).value=(*(deck->cards[i])).value;
+      (*(fc->decks[i].cards[x])).suit=(*(deck->cards[i])).suit;
+    }
+  }
+}
 
 
