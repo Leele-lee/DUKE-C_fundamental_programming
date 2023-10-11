@@ -275,11 +275,7 @@ int find_straight(deck_t * hand, suit_t fs, hand_eval_t * ans) {
 	    assert(cpind < hand->n_cards);
        	  }
 	  copy_straight(ans->cards, hand, cpind, fs,4) ;
-	  // } else {
-	  // return 0;
 	}
-	
-      // }
       else {
 	copy_straight(ans->cards, hand, i, fs,5);
       }
