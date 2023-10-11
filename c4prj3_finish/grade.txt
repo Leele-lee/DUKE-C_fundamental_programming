@@ -1,4 +1,4 @@
-Grading at Wed 11 Oct 2023 04:25:49 AM UTC
+Grading at Wed 11 Oct 2023 10:42:09 AM UTC
 Running 'make clean' to do a clean build of your project
 rm -rf *.o poker *~
 Running 'make poker OTHERFLAGS=-O3' to build your project
@@ -22,11 +22,11 @@ Running a simulation with 25000 draws for 3 hands...
 You dont seem to have the right total draws.
 Yours sum to 24903 but I expected 25000
 Running a simulation with 25000 draws for 3 hands...
-Could not find the win percent in your output
-Could not find the win percent in your output
-Could not find the win percent in your output
+    Hand 0 was close enough to our answer
+    Hand 1 was close enough to our answer
+    Hand 2 was close enough to our answer
 You dont seem to have the right total draws.
-Yours sum to 0 but I expected 25000
+Yours sum to 24884 but I expected 25000
 Running a simulation with 25000 draws for 2 hands...
     Hand 0 was close enough to our answer
     Hand 1 was close enough to our answer
@@ -49,20 +49,20 @@ Running a simulation with 30000 draws for 2 hands...
 You dont seem to have the right total draws.
 Yours sum to 29991 but I expected 30000
 Running a simulation with 40000 draws for 3 hands...
-Could not find the win percent in your output
-Could not find the win percent in your output
-Could not find the win percent in your output
+    Hand 0 was close enough to our answer
+    Hand 1 was close enough to our answer
+    Hand 2 was close enough to our answer
 You dont seem to have the right total draws.
-Yours sum to 0 but I expected 40000
+Yours sum to 39993 but I expected 40000
  - Then one from a completely made up poker variant
 Running a simulation with 100000 draws for 6 hands...
-Could not find the win percent in your output
-Could not find the win percent in your output
-Could not find the win percent in your output
-Could not find the win percent in your output
-Could not find the win percent in your output
-Could not find the win percent in your output
+    Hand 0 was close enough to our answer
+    Hand 1 was close enough to our answer
+    Hand 2 was close enough to our answer
+    Hand 3 was close enough to our answer
+    Hand 4 was close enough to our answer
+    Hand 5 was close enough to our answer
 You dont seem to have the right total draws.
-Yours sum to 0 but I expected 100000
+Yours sum to 99727 but I expected 100000
 
 Overall Grade: F
