@@ -2,142 +2,112 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <ctype.h>
+#include <string.h>
 #include "cards.h"
 #include "deck.h"
 #include "eval.h"
 #include "future.h"
 #include "input.h"
 
-void free_future(future_cards_t * fc) {
-  for (size_t i = 0; i < fc->n_decks; i++) {
+
+void free_future_cards(future_cards_t * fc) {
+  for (size_t i=0; i<fc->n_decks; i++) {
     free(fc->decks[i].cards);
   }
   free(fc->decks);
   free(fc);
 }
 
-//return the winner hand's index in handDecks                                                                                                                                                               
-//if has tie at last return a num which is n_hands                                                                                                                                                          
-int find_winner(deck_t ** handsDecks, size_t n_hands) {
-  int maxIndex = 0;
-  int tieNum = 0;
-  for (size_t i = 1; i < n_hands; i++) {
-    int cmp = compare_hands(handsDecks[i], handsDecks[maxIndex]);
-    if (cmp > 0) {
-      maxIndex = i;
-      tieNum = 0;
-    }
-    if (cmp == 0) {
-      tieNum = 1;
-    }
+void print_result(unsigned int * wins, size_t n_hands, int n_simulations) {
+  for (size_t i=0; i<n_hands; i++) {
+    printf("Hand %zu won %u / %u times (%.2f%%)\n", i, wins[i], n_simulations, 100*wins[i]/(float)(n_simulations));
   }
-  // max winner is not tie                                                                                                                                                                                  
-  if (tieNum == 1) {
-    maxIndex = n_hands;
-  }
-  // has tie                                                                                                                                                                                                
-  return maxIndex;
-}
-// For each hand, you should printf                                                                                                                                                                         
-//       "Hand %zu won %u / %u times (%.2f%%)\n"                                                                                                                                                            
-//        where the %zu is the hand number (0,1,..)  [zu is for size_t]                                                                                                                                     
-//        the first %u is the number of wins for that hand                                                                                                                                                  
-//        the second %u is the total number of trials                                                                                                                                                       
-//        the %.2f is the percentage that this win/trials ratio gives                                                                                                                                       
-//   Then you should printf one more line for the ties:                                                                                                                                                     
-//     "And there were %u ties\n"                                                                                                                                                                           
-//        Where the %u is just a count of how many ties there were                                                                                                                                          
-void print_result(unsigned winArr[], size_t n_hands, int num_trials) {
-  for (size_t i = 0; i < n_hands; i++) {
-    fprintf(stdout, "Hand %zu won %u / %u times (%.2f%%)\n", i, winArr[i], num_trials, 100 * winArr[i] / (float)num_trials);
-    fprintf(stdout, "And there were %u ties\n", winArr[n_hands]);
-  }
-}
+  printf("And there were %u ties\n", wins[n_hands]);
 
+}
+size_t find_winner(deck_t ** hands, size_t n_hands) {
+  deck_t * win_hand = hands[0];
+  int hand_win_num = 0;
+  int is_tie = 0;
+  for (size_t hand_num=1; hand_num<n_hands; hand_num++) {
+    int result_compare = compare_hands(win_hand, hands[hand_num]);
+    if (result_compare < 0) {
+      // hand 2 wins                                                                                                                                                                                        
+      win_hand = hands[hand_num];
+      is_tie = 0;
+      hand_win_num = hand_num;
+    }
+    if (result_compare == 0) {
+      // Tie                                                                                                                                                                                                
+      is_tie = 1;
+    }
+  }
+  if (is_tie == 1) {
+    hand_win_num = n_hands;
+  }
+  return hand_win_num;
+}
 int main(int argc, char ** argv) {
-
-  //Check command line arguments/report errors                                                                                                                                                              
+  //YOUR CODE GOES HERE                                                                                                                                                                                     
   if (argc != 2 && argc != 3) {
-    fprintf(stderr, "should input: poker %s [num_trials](optional)", argv[0]);
+    printf("Prawidlowa skladnia to: %s file_input no_or_trials\n", argv[0]);
     return EXIT_FAILURE;
   }
 
-  int num_trials;
-  if (argc == 2) {
-    num_trials = 10000;
-  } else {
-    num_trials = atoi(argv[2]);
+  int n_simulations = 10000;
+  if (argc == 3) {
+    n_simulations = atoi(argv[2]);
   }
 
-  //Open the input file and read the hands in it                                                                                                                                                            
-  // (you just wrote read_input!)                                                                                                                                                                           
   FILE * f = fopen(argv[1], "r");
 
-  size_t n_hands = 0;
+  // Read input file                                                                                                                                                                                        
   future_cards_t * fc = malloc(sizeof(*fc));
-  fc->n_decks = 0;
   fc->decks = NULL;
+  fc->n_decks = 0;
+  size_t n_hands = 0;
+  deck_t ** hands = read_input(f, &n_hands, fc);
 
-  deck_t ** handsDecks = read_input(f, &n_hands, fc);
-  //Create a deck with the remaining cards                                                                                                                                                                  
-  //   (you just wrote build_remaining_deck)                                                                                                                                                                
-  deck_t * remaining_cards = build_remaining_deck(handsDecks, n_hands);
-
-  //Create an array to count how many times each hand                                                                                                                                                       
-  //   wins, with one more element for if there was a tie                                                                                                                                                   
-  //   (so if there are 2 hands, you should have 3 elements).                                                                                                                                               
-  //   and initialize all its values to 0.                                                                                                                                                                  
-  unsigned winArr[n_hands + 1];
-  for (int i=0; i<n_hands+1; i++){
-    winArr[i]=0;
-  }
-
-  //  int i = 0;
-  //Do each Monte Carlo trial (repeat num_trials times)                                                                                                                                                     
-  //     - Shuffle the deck of remaining cards                                                                                                                                                              
-  //      (you wrote shuffle in Course 3)                                                                                                                                                                   
-  for (size_t i = 0; i < num_trials; i++) {
+  // Build deck excluding cards from hands                                                                                                                                                                  
+  deck_t *deck = build_remaining_deck(hands, n_hands);
+  // Create an array to count how many times each hand win                                                                                                                                                  
+  // (if tie, add value to the last elemenr)                                                                                                                                                                
+  // Therefore, number of element should be n_hands + 1 (tie slot)                                                                                                                                          
+  unsigned int * wins = calloc(n_hands + 1, sizeof(*wins));
+    // Monte Carlo trial                                                                                                                                                                                      
+  for (size_t simul=0; simul<n_simulations; simul++) {
     if (n_hands == 1) {
-      winArr[0] = num_trials;
+      wins[0] = n_simulations;
       break;
     }
-    shuffle(remaining_cards);
-    //i++;
-
-    //  - Assign unknown cards from the shuffled deck                                                                                                                                                       
-    //    (you just wrote future_cards_from_deck)                                                                                                                                                           
-    future_cards_from_deck(remaining_cards, fc);
-        //  - Use compare_hands (from Course 3) to                                                                                                                                                              
-    //    figure out which hand won. Note that                                                                                                                                                              
-    //    with potentially more than 2 hands,                                                                                                                                                               
-    //    this is much like finding the max of                                                                                                                                                              
-    //    an array, but using compare_hands                                                                                                                                                                 
-    //    instead of >.                                                                                                                                                                                     
-    int winnerIndex = find_winner(handsDecks, n_hands);
-
-    //      - Increment the win count for the winning                                                                                                                                                       
-    //    hand (or for the "ties" element of the array                                                                                                                                                      
-    //    if there was a tie).                                                                                                                                                                              
-    winArr[winnerIndex]++;
+    //Shuffle the deck                                                                                                                                                                                      
+    shuffle(deck);
+    // Assign unknown cards from the shuffled deck                                                                                                                                                          
+    future_cards_from_deck(deck, fc);
+    // Compare hands                                                                                                                                                                                        
+    size_t hand_win_num = 0;
+    hand_win_num = find_winner(hands, n_hands);
+    wins[hand_win_num]++;
   }
 
-  //  - After you do all your trials, you just need                                                                                                                                                         
-  // to print your results, free any memory                                                                                                                                                                 
-  // you allocated, and close any open files.                                                                                                                                                               
-  print_result(winArr, n_hands, num_trials);
+  // Print evaluation of each hand                                                                                                                                                                          
+  print_result(wins, n_hands, n_simulations);
 
-  //free                                                                                                                                                                                                    
-  for (size_t i = 0; i < n_hands; i++) {
-    free_deck(handsDecks[i]);
+  // Free allocated memory                                                                                                                                                                                  
+  for (size_t i=0; i<n_hands; i++) {
+    free_deck(hands[i]);
   }
-  free(handsDecks);
-  free_future(fc);
-  free_deck(remaining_cards);
-    //close file                                                                                                                                                                                              
+  free(hands);
+  free(wins);
+  free_future_cards(fc);
+  free_deck(deck);
+  deck = NULL;
+
+  // close file                                                                                                                                                                                             
   if (fclose(f) != 0) {
     perror("Error: Could not close file!\n");
     return EXIT_FAILURE;
   }
+
   return EXIT_SUCCESS;
 }
-
