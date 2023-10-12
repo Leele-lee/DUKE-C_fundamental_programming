@@ -22,11 +22,12 @@ int find_winner(deck_t ** handsDecks, size_t n_hands) {
   int maxIndex = 0;
   int tieNum = 0;
   for (size_t i = 1; i < n_hands; i++) {
-    if (compare_hands(handsDecks[i], handsDecks[maxIndex]) > 0) {
+    int cmp = compare_hands(handsDecks[i], handsDecks[maxIndex]);
+    if (cmp > 0) {
       maxIndex = i;
       tieNum = 0;
     }
-    if (compare_hands(handsDecks[i], handsDecks[maxIndex]) == 0) {
+    if (cmp == 0) {
       tieNum = 1;
     }
   }

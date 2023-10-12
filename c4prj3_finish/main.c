@@ -92,13 +92,17 @@ int main(int argc, char ** argv) {
     winArr[i]=0;
   }
 
-  int i = 0;
+  //  int i = 0;
   //Do each Monte Carlo trial (repeat num_trials times)                                                                                                                                                     
   //     - Shuffle the deck of remaining cards                                                                                                                                                              
   //      (you wrote shuffle in Course 3)                                                                                                                                                                   
-  while (i < num_trials) {
+  for (size_t i = 0; i < num_trials; i++) {
+    if (n_hands == 1) {
+      winArr[0] = num_trials;
+      break;
+    }
     shuffle(remaining_cards);
-    i++;
+    //i++;
 
     //  - Assign unknown cards from the shuffled deck                                                                                                                                                       
     //    (you just wrote future_cards_from_deck)                                                                                                                                                           
